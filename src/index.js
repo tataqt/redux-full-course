@@ -1,6 +1,7 @@
 import './styles.css'
-import { createStore } from './createStore';
+import { createStore } from 'redux';
 import { rootReducer } from './redux/rootReducer';
+import { increment, decrement, asyncIncrement } from './redux/actionCreators';
 
 const counter = document.getElementById("counter");
 const addBtn = document.getElementById("add");
@@ -13,17 +14,15 @@ const store = createStore(rootReducer, 0);
 window.store = store;
 
 addBtn.addEventListener('click', () => {
-    store.dispatch({type: 'INCREMENT'});
+    store.dispatch(increment());
 });
 
 subBtn.addEventListener('click', () => {
-    store.dispatch({type: 'DECREMENT'});
+    store.dispatch(decrement());
 });
 
 asyncBtn.addEventListener('click', () => {
-    setTimeout(() => {
-
-    }, 2000)
+    store.dispatch(asyncIncrement());
 });
 
 store.subscribe(() => {
@@ -32,7 +31,7 @@ store.subscribe(() => {
     counter.textContent = state;
 });
 
-store.dispatch({type: 'INIT_APPLICATION'})
+store.dispatch({ type: 'INIT_APPLICATION' })
 
 themeBtn.addEventListener('click', () => {
     // document.body.classList.toggle('dark') ;
