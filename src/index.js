@@ -1,7 +1,8 @@
 import './styles.css'
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { rootReducer } from './redux/rootReducer';
-import { increment, decrement, asyncIncrement } from './redux/actionCreators';
+import { increment, decrement, asyncIncrement } from './redux/action';
 
 const counter = document.getElementById("counter");
 const addBtn = document.getElementById("add");
@@ -9,7 +10,11 @@ const subBtn = document.getElementById("sub");
 const asyncBtn = document.getElementById("async");
 const themeBtn = document.getElementById("theme");
 
-const store = createStore(rootReducer, 0);
+const store = createStore(
+    rootReducer,
+    0,
+    applyMiddleware(thunk)
+);
 
 window.store = store;
 

@@ -6,11 +6,6 @@ export function rootReducer(state, action) {
             return state + 1
         case DECREMENT:
             return state - 1
-        case ASYNC_INCREMENT:
-            setTimeout(() => {
-                return state + 1
-            }, 2000)
-            
         default:
             return state;
     }
